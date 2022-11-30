@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 
 class Movie {
   late List<String> actors;
@@ -11,6 +12,7 @@ class Movie {
   String poster = '';
   String posterurl = '';
   late List<int> ratings;
+  String avrRating = '';
   String releaseDate = '';
   String storyline = '';
   String title = '';
@@ -32,6 +34,7 @@ class Movie {
       movie.poster = json['poster'];
       movie.posterurl = json['posterurl'];
       movie.ratings = (json['ratings'] as List<dynamic>).map<int>((value) => value.toInt()).toList();
+      movie.avrRating = movie.ratings.average.toStringAsFixed(1);
       movie.releaseDate = json['releaseDate'];
       movie.storyline = json['storyline'];
       movie.title = json['title'];

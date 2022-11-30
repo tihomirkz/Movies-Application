@@ -59,7 +59,7 @@ class MoviesView extends StatelessWidget {
                               ),
                               const SizedBox(height: 5,),
                               Text(
-                                movies[index].imdbRating,
+                                movies[index].avrRating,
                                 style: const TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
