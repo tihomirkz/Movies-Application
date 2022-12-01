@@ -47,6 +47,12 @@ class DetailsView extends StatelessWidget {
           text(text: 'Genres: ${state.movies.genres.join(', ').toString()}', size: 20),
           const SizedBox(height: 8),
           text(text: 'Duration: ${state.movies.durationMinutes}', size: 20),
+          const SizedBox(height: 8),
+          text(text: 'Release Date: ${state.movies.releaseDate}', size: 20),
+          const SizedBox(height: 8),
+          text(text: 'Actors: ${state.movies.actors.join(', ').toString()}', size: 20),
+          const SizedBox(height: 8),
+          text(text: 'Storyline: ${state.movies.storyline}', size: 20),
         ],
       ),
     );
