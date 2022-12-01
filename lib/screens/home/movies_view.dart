@@ -44,7 +44,8 @@ class MoviesView extends StatelessWidget {
                                   child: CachedNetworkImage(
                                     imageUrl: movies[index].posterurl,
                                     placeholder: (context, url) => const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                                    errorWidget: (context, url, error) =>
+                                      const Image(image: AssetImage('assets/images/no_poster.jpg')),
                                   ),
                                 ),
                               ),
