@@ -24,34 +24,7 @@ class MoviesView extends StatelessWidget {
               return ListView.builder(
                 itemCount: movies.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    margin: const EdgeInsets.all(8),
-                    elevation: 5,
-                    color: Colors.black12,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child:
-                                posterImage(imageUrl: movies[index].posterurl),
-                          ),
-                          text(text: movies[index].title),
-                          const SizedBox(height: 8),
-                          ratingBar(movies[index].avrRating),
-                          const SizedBox(height: 8),
-                          text(
-                            text: 'Rating: ${movies[index].avrRating.toStringAsFixed(1)}',
-                            size: 20,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                  return movieCard(context, movies[index]);
                 },
               );
             }
@@ -65,4 +38,37 @@ class MoviesView extends StatelessWidget {
       ),
     );
   }
+
+  Widget movieCard(BuildContext context, Movie movie) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      margin: const EdgeInsets.all(8),
+      elevation: 5,
+      color: Colors.black12,
+      child: ListTile(
+        title: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: posterImage(imageUrl: movie.posterurl),
+              ),
+              text(text: movie.title),
+              const SizedBox(height: 8),
+              ratingBar(movie.avrRating),
+              const SizedBox(height: 8),
+              text(
+                text: 'Rating: ${movie.avrRating.toStringAsFixed(1)}',
+                size: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
 }
