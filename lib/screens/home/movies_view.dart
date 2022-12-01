@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'movie_model.dart';
+import 'package:movies_application/models/movie_model.dart';
 import 'movies_page.dart';
 
 class MoviesView extends StatelessWidget {
