@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies_application/models/movie_model.dart';
+import 'package:movies_application/screens/home/widgets/movie_widgets.dart';
 import 'movies_page.dart';
 
 class MoviesView extends StatelessWidget {
@@ -38,49 +37,22 @@ class MoviesView extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(Radius.circular(8.0),
-                                  ),
-                                  child: CachedNetworkImage(
-                                    imageUrl: movies[index].posterurl,
-                                    placeholder: (context, url) => const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                      const Image(image: AssetImage('assets/images/no_poster.jpg')),
-                                  ),
-                                ),
+                                child: posterImage(imageUrl: movies[index].posterurl),
                               ),
-                              Text(movies[index].title,
-                                style: const TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              RatingBarIndicator(
-                                rating: movies[index].avrRating,
-                                itemCount: 10,
-                                itemSize: 25.0,
-                                physics: const BouncingScrollPhysics(),
-                                itemBuilder: (context, _) => const Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                movies[index].avrRating.toStringAsFixed(1),
-                                style: const TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white
-                                ),
+                              text(text: movies[index].title),
+                              const SizedBox(height: 8,),
+                              ratingBar(movies[index].avrRating),
+                              const SizedBox(height: 8,),
+                              text(
+                                text: 'Rating: ${movies[index].avrRating.toStringAsFixed(1)}',
+                                size: 20,
                               ),
                             ],
                           ),
                         ),
                       );
-                    });
+                    },
+                );
               }
               if (snapshot.hasError) {
                 print(snapshot.error.toString());
