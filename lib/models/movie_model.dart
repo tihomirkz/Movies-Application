@@ -12,7 +12,7 @@ class Movie {
   String poster = '';
   String posterurl = '';
   late List<int> ratings;
-  String avrRating = '';
+  double avrRating = 0;
   String releaseDate = '';
   String storyline = '';
   String title = '';
@@ -34,7 +34,7 @@ class Movie {
       movie.poster = json['poster'];
       movie.posterurl = json['posterurl'];
       movie.ratings = (json['ratings'] as List<dynamic>).map<int>((value) => value.toInt()).toList();
-      movie.avrRating = movie.ratings.average.toStringAsFixed(1);
+      movie.avrRating = movie.ratings.average;
       movie.releaseDate = json['releaseDate'];
       movie.storyline = json['storyline'];
       movie.title = json['title'];
