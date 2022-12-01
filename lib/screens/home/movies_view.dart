@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies_application/models/movie_model.dart';
 import 'movies_page.dart';
 
@@ -35,7 +36,6 @@ class MoviesView extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             children: [
-
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: ClipRRect(
@@ -56,9 +56,20 @@ class MoviesView extends StatelessWidget {
                                     color: Colors.white
                                 ),
                               ),
-                              const SizedBox(height: 5,),
+                              const SizedBox(height: 8),
+                              RatingBarIndicator(
+                                rating: movies[index].avrRating,
+                                itemCount: 10,
+                                itemSize: 25.0,
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
                               Text(
-                                movies[index].avrRating,
+                                movies[index].avrRating.toStringAsFixed(1),
                                 style: const TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
