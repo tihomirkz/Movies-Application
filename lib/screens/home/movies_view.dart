@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/models/movie_model.dart';
 import 'movies_page.dart';
@@ -40,12 +41,10 @@ class MoviesView extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.all(Radius.circular(8.0),
                                   ),
-                                  child: Image.network(
-                                      movies[index].posterurl,
-                                      width: double.infinity,
-                                      // height: 150,
-                                      fit:BoxFit.fill
-
+                                  child: CachedNetworkImage(
+                                    imageUrl: movies[index].posterurl,
+                                    placeholder: (context, url) => const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) => const Icon(Icons.error),
                                   ),
                                 ),
                               ),
