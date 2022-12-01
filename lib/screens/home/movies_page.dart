@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:movies_application/models/movie_model.dart';
 
-import '../../models/movie_model.dart';
 import 'movies_service.dart';
 import 'movies_view.dart';
 
@@ -23,5 +23,3 @@ class MoviesController extends State<MoviesPage> {
     futureMovie = service.fetchMovies();
   }
 }
-
-
