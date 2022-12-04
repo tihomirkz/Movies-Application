@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/screens/home/movies_page.dart';
-import 'package:movies_application/screens/home/widgets/ligin_widget.dart';
+import 'package:movies_application/screens/auth/log_in/login_widget.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +45,7 @@ class MainPage extends StatelessWidget {
           } else if(snapshot.hasData) {
             return const MoviesPage();
           } else {
-            return const LoginWidget();
+            return const LoginPage();
           }
         },
       ),
