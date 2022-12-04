@@ -40,10 +40,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               minimumSize: const Size.fromHeight(50),
             ),
             icon: const Icon(Icons.lock_open, size: 32),
-            label: const Text(
-              'Sign In',
-              style: TextStyle(fontSize: 24),
-            ),
+            label: text(text: 'Sign In', size: 24),
             onPressed: signIn,
           )
         ],
