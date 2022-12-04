@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movies_application/models/movie_model.dart';
 
@@ -21,5 +22,15 @@ class MoviesController extends State<MoviesPage> {
   void initState() {
     super.initState();
     futureMovie = service.fetchMovies();
+  }
+
+  void handleClick(int item) {
+    switch (item) {
+      case 0:
+        FirebaseAuth.instance.signOut();
+        break;
+      case 1:
+        break;
+    }
   }
 }

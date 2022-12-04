@@ -14,6 +14,16 @@ class MoviesView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movies Application'),
+        actions: <Widget>[
+          PopupMenuButton<int>(
+            icon: const Icon(Icons.menu),
+            onSelected: (item) => state.handleClick(item),
+            itemBuilder: (context) => [
+              const PopupMenuItem<int>(value: 0, child: Text('Logout')),
+              const PopupMenuItem<int>(value: 1, child: Text('Profile')),
+            ],
+          ),
+        ],
       ),
       body: Container(
         color: Colors.blueGrey,
