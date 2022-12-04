@@ -10,6 +10,8 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
+final navigationKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigationKey,
       title: 'Movies Application',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
@@ -35,7 +38,11 @@ class MainPage extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if(snapshot.hasData) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if(snapshot.hasError) {
+            return const Center(child: Text('Something went wrong'),);
+          } else if(snapshot.hasData) {
             return const MoviesPage();
           } else {
             return const LoginWidget();

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_application/main.dart';
 
 import 'movie_widgets.dart';
 
@@ -51,9 +52,20 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
+    showDialog(
+      context: context,
+      builder: (context) => const Center(child: CircularProgressIndicator(),
+      ),
     );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch(e) {
+      print(e);
+    }
+    navigationKey.currentState?.popUntil((route) => route.isFirst);
   }
 }
