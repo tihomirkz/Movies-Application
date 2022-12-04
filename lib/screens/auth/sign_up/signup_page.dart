@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/main.dart';
-import 'package:movies_application/screens/auth/log_in/login_view.dart';
+import 'package:movies_application/screens/auth/sign_up/signup_view.dart';
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({Key? key, required this.onClickedSignUp}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key, required this.onClickedSignIn}) : super(key: key);
 
-  final VoidCallback onClickedSignUp;
+  final VoidCallback onClickedSignIn;
 
   @override
-  State<LogInPage> createState() => LoginController();
+  State<SignUpPage> createState() => SignUpController();
 }
 
-class LoginController extends State<LogInPage> {
+class SignUpController extends State<SignUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -24,9 +24,9 @@ class LoginController extends State<LogInPage> {
   }
 
   @override
-  Widget build(BuildContext context) => LoginView(this);
+  Widget build(BuildContext context) => SignUpView(this);
 
-  Future signIn() async {
+  Future signUp() async {
     showDialog(
       context: context,
       builder: (context) => const Center(child: CircularProgressIndicator(),
@@ -34,7 +34,7 @@ class LoginController extends State<LogInPage> {
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );

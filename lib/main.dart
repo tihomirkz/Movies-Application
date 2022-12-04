@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_application/screens/auth/auth_page.dart';
 import 'package:movies_application/screens/home/movies_page.dart';
 import 'package:movies_application/screens/auth/log_in/login_widget.dart';
 
@@ -45,7 +46,7 @@ class MainPage extends StatelessWidget {
           } else if(snapshot.hasData) {
             return const MoviesPage();
           } else {
-            return const LoginPage();
+            return const AuthPage();
           }
         },
       ),
