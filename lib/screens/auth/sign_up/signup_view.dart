@@ -14,6 +14,7 @@ class SignUpView extends StatelessWidget {
       password: state.passwordController,
       onPressedButton: state.signUp,
       onPressedText: state.widget.onClickedSignIn,
+      formKey: state.formKey,
     );
   }
 }

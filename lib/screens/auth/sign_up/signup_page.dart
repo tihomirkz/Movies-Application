@@ -15,6 +15,7 @@ class SignUpPage extends StatefulWidget {
 class SignUpController extends State<SignUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -27,6 +28,9 @@ class SignUpController extends State<SignUpPage> {
   Widget build(BuildContext context) => SignUpView(this);
 
   Future signUp() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+
     showDialog(
       context: context,
       builder: (context) => const Center(child: CircularProgressIndicator(),

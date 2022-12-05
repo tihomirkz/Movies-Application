@@ -41,12 +41,20 @@ Widget posterImage({required String imageUrl}) {
   );
 }
 
-Widget textField(TextEditingController controller, String labelText, TextInputAction action, bool obscureText) {
-  return TextField(
+Widget textField({
+  required TextEditingController controller,
+  required String labelText,
+  required TextInputAction action,
+  required bool obscureText,
+  required String? Function(String?) validator,
+}) {
+  return TextFormField(
     controller: controller,
     cursorColor: Colors.white,
     textInputAction: TextInputAction.next,
     obscureText: obscureText,
     decoration: InputDecoration(labelText: labelText),
+    autovalidateMode: AutovalidateMode.disabled,
+    validator: validator,
   );
 }

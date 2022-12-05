@@ -15,6 +15,7 @@ class LogInPage extends StatefulWidget {
 class LoginController extends State<LogInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -27,6 +28,9 @@ class LoginController extends State<LogInPage> {
   Widget build(BuildContext context) => LoginView(this);
 
   Future signIn() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+
     showDialog(
       context: context,
       builder: (context) => const Center(child: CircularProgressIndicator(),

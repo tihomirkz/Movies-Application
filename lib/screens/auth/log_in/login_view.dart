@@ -14,6 +14,7 @@ class LoginView extends StatelessWidget {
       password: state.passwordController,
       onPressedButton: state.signIn,
       onPressedText: state.widget.onClickedSignUp,
+      formKey: state.formKey,
     );
   }
 }
