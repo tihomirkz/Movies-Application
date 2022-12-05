@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/main.dart';
-import 'package:movies_application/screens/auth/log_in/login_view.dart';
+import 'login_view.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key, required this.onClickedSignUp}) : super(key: key);

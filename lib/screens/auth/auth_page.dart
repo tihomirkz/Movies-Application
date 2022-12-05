@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:movies_application/screens/auth/log_in/login_page.dart';
 import 'package:movies_application/screens/auth/sign_up/signup_page.dart';
 
-import 'log_in/login_widget.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
