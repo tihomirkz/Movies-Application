@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/main.dart';
+import 'package:movies_application/screens/auth/firebase_service.dart';
 import 'package:movies_application/screens/auth/sign_up/signup_view.dart';
-import 'package:movies_application/screens/auth/utils/utils.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key, required this.onClickedSignIn}) : super(key: key);
@@ -17,6 +16,7 @@ class SignUpController extends State<SignUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final firebaseService = FirebaseService();
 
   @override
   void dispose() {
@@ -38,14 +38,8 @@ class SignUpController extends State<SignUpPage> {
       ),
     );
 
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-    } on FirebaseAuthException catch(e) {
-      Utils.showSnackBar(e.message);
-    }
+    await firebaseService.signUpService(emailController, passwordController);
+
     navigationKey.currentState?.popUntil((route) => route.isFirst);
   }
 }

@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/main.dart';
-import 'package:movies_application/screens/auth/utils/utils.dart';
+import 'package:movies_application/screens/auth/firebase_service.dart';
 import 'login_view.dart';
 
 class LogInPage extends StatefulWidget {
@@ -17,6 +16,7 @@ class LoginController extends State<LogInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final firebaseService = FirebaseService();
 
   @override
   void dispose() {
@@ -38,14 +38,8 @@ class LoginController extends State<LogInPage> {
       ),
     );
 
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-    } on FirebaseAuthException catch(e) {
-      Utils.showSnackBar(e.message);
-    }
+    await firebaseService.signInService(emailController, passwordController);
+
     navigationKey.currentState?.popUntil((route) => route.isFirst);
   }
 }
