@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/main.dart';
+import 'package:movies_application/screens/auth/utils/utils.dart';
 import 'login_view.dart';
 
 class LogInPage extends StatefulWidget {
@@ -43,7 +44,7 @@ class LoginController extends State<LogInPage> {
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch(e) {
-      print(e);
+      Utils.showSnackBar(e.message);
     }
     navigationKey.currentState?.popUntil((route) => route.isFirst);
   }

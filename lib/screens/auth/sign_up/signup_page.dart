@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/main.dart';
 import 'package:movies_application/screens/auth/sign_up/signup_view.dart';
+import 'package:movies_application/screens/auth/utils/utils.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key, required this.onClickedSignIn}) : super(key: key);
@@ -43,7 +44,7 @@ class SignUpController extends State<SignUpPage> {
         password: passwordController.text.trim(),
       );
     } on FirebaseAuthException catch(e) {
-      print(e);
+      Utils.showSnackBar(e.message);
     }
     navigationKey.currentState?.popUntil((route) => route.isFirst);
   }
