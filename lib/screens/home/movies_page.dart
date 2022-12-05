@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:movies_application/models/movie_model.dart';
+import 'package:movies_application/screens/auth/firebase_service.dart';
 
 import 'movies_service.dart';
 import 'movies_view.dart';
@@ -17,6 +17,7 @@ class MoviesController extends State<MoviesPage> {
   Widget build(BuildContext context) => MoviesView(this);
   late Future<List<Movie>> futureMovie;
   final service = MoviesService();
+  final firebaseService = FirebaseService();
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class MoviesController extends State<MoviesPage> {
   void handleClick(int item) {
     switch (item) {
       case 0:
-        FirebaseAuth.instance.signOut();
+        firebaseService.signOut();
         break;
       case 1:
         break;
