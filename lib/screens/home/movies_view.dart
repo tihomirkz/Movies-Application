@@ -20,7 +20,7 @@ class MoviesView extends StatelessWidget {
             onSelected: (item) => state.handleClick(item),
             itemBuilder: (context) => [
               const PopupMenuItem<int>(value: 0, child: Text('Logout')),
-              const PopupMenuItem<int>(value: 1, child: Text('Profile')),
+              const PopupMenuItem<int>(value: 1, child: Text('User profile')),
             ],
           ),
         ],

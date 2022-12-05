@@ -29,4 +29,7 @@ class FirebaseService {
     FirebaseAuth.instance.signOut();
   }
 
+  User currentUser() {
+    return FirebaseAuth.instance.currentUser!;
+  }
 }
