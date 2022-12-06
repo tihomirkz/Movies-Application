@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:movies_application/models/movie_model.dart';
 import 'package:movies_application/screens/auth/firebase_service.dart';
+import 'package:movies_application/screens/user_profile/user_profile_page.dart';
 
 import 'movies_service.dart';
 import 'movies_view.dart';
@@ -31,7 +32,16 @@ class MoviesController extends State<MoviesPage> {
         firebaseService.signOut();
         break;
       case 1:
+        userProfilePage();
         break;
     }
+  }
+
+  void userProfilePage() {
+    Navigator.push(context,
+      MaterialPageRoute(
+        builder: (context) =>  const UserProfilePage(),
+      ),
+    );
   }
 }
