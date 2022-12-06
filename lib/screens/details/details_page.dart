@@ -4,18 +4,16 @@ import 'package:movies_application/models/movie_model.dart';
 import 'details_view.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  const DetailsPage({required this.movies, Key? key}) : super(key: key);
+  final Movie movies;
 
   @override
   State<DetailsPage> createState() => DetailsController();
 }
 
 class DetailsController extends State<DetailsPage> {
-  late Movie movies;
-
   @override
   Widget build(BuildContext context) {
-    movies = ModalRoute.of(context)!.settings.arguments as Movie;
     return DetailsView(this);
   }
 }
