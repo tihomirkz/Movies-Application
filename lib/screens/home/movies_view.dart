@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_application/models/movie_model.dart';
+import 'package:movies_application/screens/details/details_page.dart';
 import 'package:movies_application/screens/home/widgets/movie_widgets.dart';
 import 'movies_page.dart';
 
@@ -67,7 +68,22 @@ class MoviesView extends StatelessWidget {
             ],
           ),
         ),
+        onTap: () {
+          onTapMovie(context, movie);
+        },
       ),
     );
   }
+
+  void onTapMovie(BuildContext context, Movie movie) {
+    Navigator.push(context,
+      MaterialPageRoute(
+        builder: (context) =>  const DetailsPage(),
+        settings: RouteSettings(
+          arguments: movie,
+        ),
+      ),
+    );
+  }
+
 }

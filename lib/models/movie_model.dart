@@ -5,6 +5,7 @@ class Movie {
   int averageRating = 0;
   String contentRating = '';
   String duration = '';
+  String durationMinutes = '';
   late List<String> genres;
   String id = '';
   String imdbRating = '0';
@@ -27,6 +28,7 @@ class Movie {
       movie.averageRating = json['averageRating'];
       movie.contentRating = json['contentRating'];
       movie.duration = json['duration'];
+      movie.durationMinutes = movie.duration.isNotEmpty ? movie.duration.substring(2) : '0';
       movie.genres = (json['genres'] as List<dynamic>).cast<String>();
       movie.id = json['id'];
       movie.imdbRating = json['imdbRating'].toString() ;
