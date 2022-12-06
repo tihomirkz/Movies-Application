@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "107812676860",
+    "project_id": "movies-application-9d4ab",
+    "storage_bucket": "movies-application-9d4ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107812676860:android:79edf4c62eb2307d41e379",
+        "android_client_info": {
+          "package_name": "com.interviewtask.movies_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107812676860-3vhdlt45bnv0l6e37iravd37k5rh0org.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxi0j8upmKmUQ_SAIHNKe-apCbd1XczvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107812676860-3vhdlt45bnv0l6e37iravd37k5rh0org.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "107812676860-43mkmg6jhipcbsbldskf2k8ve7ujvhjc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.interviewtask.moviesApplication"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
