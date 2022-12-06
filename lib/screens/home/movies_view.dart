@@ -70,5 +70,4 @@ class MoviesView extends StatelessWidget {
       ),
     );
   }
-
 }
