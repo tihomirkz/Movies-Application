@@ -21,6 +21,8 @@ class UserProfileView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             text(text: 'Profile email:  ${state.user.email}', size: 20),
+            const SizedBox(height: 15,),
+            text(text: 'Name:  ${state.user.displayName}', size: 20),
             const SizedBox(height: 10,),
             text(text: 'Profile creation date:  ${state.user.metadata.creationTime?.toLocal()}', size: 20),
           ],
