@@ -10,6 +10,7 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return logInSignUp(
       isSignIn: true,
+      displayName: state.displayNameController,
       email: state.emailController,
       password: state.passwordController,
       onPressedButton: state.signUp,

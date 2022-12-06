@@ -5,6 +5,7 @@ import 'package:movies_application/screens/home/widgets/movie_widgets.dart';
 
 Widget logInSignUp({
   required bool isSignIn,
+  TextEditingController? displayName,
   required TextEditingController email,
   required TextEditingController password,
   required VoidCallback onPressedButton,
@@ -20,6 +21,17 @@ Widget logInSignUp({
         children: [
           text(text: isSignIn ? 'Sign Up' : 'Sign In', size: 35, color: Colors.blueGrey),
           const SizedBox(height: 40),
+          if (isSignIn)
+            textField(
+              controller: displayName!,
+              labelText: 'Name',
+              action: TextInputAction.next,
+              obscureText: false,
+              validator: (name) => name != null && name.length < 3
+                  ? 'Enter min. 3 characters'
+                  : null,
+            ),
+          const SizedBox(height: 4),
           textField(
               controller: email,
               labelText: 'Email',

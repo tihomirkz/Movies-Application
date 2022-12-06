@@ -14,12 +14,14 @@ class FirebaseService {
     }
   }
 
-  Future<void> signUpService(TextEditingController email, TextEditingController password) async {
+  Future<void> signUpService(TextEditingController email, TextEditingController password,
+      TextEditingController displayName) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email.text.trim(),
         password: password.text.trim(),
       );
+      await userCredential.user?.updateDisplayName(displayName.text.trim());
     } on FirebaseAuthException catch(e) {
       Utils.showSnackBar(e.message);
     }

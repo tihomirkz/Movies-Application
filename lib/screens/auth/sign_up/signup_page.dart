@@ -13,6 +13,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class SignUpController extends State<SignUpPage> {
+  final displayNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -22,6 +23,7 @@ class SignUpController extends State<SignUpPage> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    displayNameController.dispose();
     super.dispose();
   }
 
@@ -38,7 +40,7 @@ class SignUpController extends State<SignUpPage> {
       ),
     );
 
-    await firebaseService.signUpService(emailController, passwordController);
+    await firebaseService.signUpService(emailController, passwordController, displayNameController);
 
     navigationKey.currentState?.popUntil((route) => route.isFirst);
   }
