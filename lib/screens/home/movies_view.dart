@@ -96,10 +96,7 @@ class MoviesView extends StatelessWidget {
   void onTapMovie(BuildContext context, Movie movie) {
     Navigator.push(context,
       MaterialPageRoute(
-        builder: (context) =>  const DetailsPage(),
-        settings: RouteSettings(
-          arguments: movie,
-        ),
+        builder: (context) => DetailsPage(movies: movie),
       ),
     );
   }
