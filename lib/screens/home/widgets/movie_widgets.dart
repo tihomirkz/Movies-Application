@@ -17,12 +17,13 @@ Widget ratingBar(double rating) {
 
 Text text({
   required String text,
-  double size = 25, }) {
+  double size = 25,
+  Color color = Colors.white,}) {
   return Text(text,
     style: TextStyle(
         fontSize: size,
         fontWeight: FontWeight.bold,
-        color: Colors.white
+        color: color
     ),
   );
 }
@@ -37,5 +38,23 @@ Widget posterImage({required String imageUrl}) {
       errorWidget: (context, url, error) =>
       const Image(image: AssetImage('assets/images/no_poster.jpg')),
     ),
+  );
+}
+
+Widget textField({
+  required TextEditingController controller,
+  required String labelText,
+  required TextInputAction action,
+  required bool obscureText,
+  required String? Function(String?) validator,
+}) {
+  return TextFormField(
+    controller: controller,
+    cursorColor: Colors.white,
+    textInputAction: TextInputAction.next,
+    obscureText: obscureText,
+    decoration: InputDecoration(labelText: labelText),
+    autovalidateMode: AutovalidateMode.disabled,
+    validator: validator,
   );
 }
