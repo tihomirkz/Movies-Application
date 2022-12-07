@@ -1,29 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:movies_application/screens/auth/utils/utils.dart';
+import 'package:movies_application/screens/auth/result.dart';
 
 class FirebaseService {
-  Future<void> signInService(TextEditingController email, TextEditingController password) async {
+  Future<Result<UserCredential, String>> signInService(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email.text.trim(),
-        password: password.text.trim(),
+      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
       );
+      return Result.success(userCredential);
     } on FirebaseAuthException catch(e) {
-      Utils.showSnackBar(e.message);
+      return Result.error(e.message);
     }
   }
 
-  Future<void> signUpService(TextEditingController email, TextEditingController password,
-      TextEditingController displayName) async {
+  Future<Result<UserCredential, String>> signUpService(String email, String password,
+      String displayName) async {
     try {
       final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.text.trim(),
-        password: password.text.trim(),
+        email: email,
+        password: password,
       );
-      await userCredential.user?.updateDisplayName(displayName.text.trim());
+      await userCredential.user?.updateDisplayName(displayName);
+      return Result.success(userCredential);
     } on FirebaseAuthException catch(e) {
-      Utils.showSnackBar(e.message);
+      return Result.error(e.message);
     }
   }
 
