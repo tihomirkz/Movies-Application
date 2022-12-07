@@ -18,6 +18,7 @@ class Movie {
   String storyline = '';
   String title = '';
   String year = '';
+  bool isLiked = false;
 
   Movie();
 
@@ -41,6 +42,7 @@ class Movie {
       movie.storyline = json['storyline'];
       movie.title = json['title'];
       movie.year = json['year'];
+      movie.isLiked = json['isLiked'] ?? false;
 
     } catch (exception) {
       print('PARSING ESTIMATE $exception');
@@ -49,4 +51,27 @@ class Movie {
     return movie;
   }
 
+
+  Map<String, dynamic> toJson() {
+    return {
+      'actors': actors,
+      'averageRating': averageRating,
+      'contentRating': contentRating,
+      'duration': duration,
+      'durationMinutes': durationMinutes,
+      'genres': genres,
+      'id': id,
+      'imdbRating': imdbRating,
+      'originalTitle': originalTitle,
+      'poster': poster,
+      'posterurl': posterurl,
+      'ratings': ratings,
+      'avrRating': posterurl,
+      'releaseDate': releaseDate,
+      'storyline': title,
+      'year': year,
+      'posterurl': posterurl,
+      'isLiked': isLiked,
+    };
+  }
 }
