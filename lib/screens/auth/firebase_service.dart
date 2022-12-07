@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:movies_application/models/movie_model.dart';
 import 'package:movies_application/screens/auth/result.dart';
 
 class FirebaseService {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   Future<Result<UserCredential, String>> signInService(String email, String password) async {
     try {
-      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final userCredential = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -17,7 +21,7 @@ class FirebaseService {
   Future<Result<UserCredential, String>> signUpService(String email, String password,
       String displayName) async {
     try {
-      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -29,10 +33,25 @@ class FirebaseService {
   }
 
   void signOut() {
-    FirebaseAuth.instance.signOut();
+    auth.signOut();
   }
 
   User currentUser() {
-    return FirebaseAuth.instance.currentUser!;
+    return auth.currentUser!;
+  }
+
+  Future<void> setMovie(Movie movie) async {
+    await FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser!.email.toString())
+        .doc(movie.title)
+        .set({"watchMovie": movie.toJson()})
+        .onError((e, _) => print("Error writing document: $e"));
+  }
+
+  Future<void> deleteMovie(Movie movie) async {
+    await FirebaseFirestore.instance
+        .collection(FirebaseAuth.instance.currentUser!.email.toString())
+        .doc(movie.title)
+        .delete();
   }
 }
