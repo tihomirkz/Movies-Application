@@ -73,7 +73,26 @@ class MoviesView extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: posterImage(imageUrl: movie.posterurl),
+                child: Stack(
+                  children: <Widget> [
+                    posterImage(imageUrl: movie.posterurl),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        onPressed: () {
+                          state.setMovies(movie);
+                        },
+                        iconSize: 50,
+                        icon: Icon(
+                          movie.isLiked
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Colors.blueGrey,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               text(text: movie.title),
               const SizedBox(height: 8),

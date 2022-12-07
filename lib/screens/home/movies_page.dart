@@ -51,4 +51,18 @@ class MoviesController extends State<MoviesPage> with MoviesService {
       ),
     );
   }
+
+  Future<void> setMovies(Movie movie) async {
+    if (!movie.isLiked) {
+      setState(() {
+        movie.isLiked = true;
+      });
+      firebaseService.setMovie(movie);
+    } else if (movie.isLiked) {
+      setState(() {
+        movie.isLiked = false;
+      });
+      firebaseService.deleteMovie(movie);
+    }
+  }
 }
