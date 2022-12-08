@@ -15,6 +15,13 @@ class MoviesView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Movies Application'),
         actions: <Widget>[
+          IconButton(
+            onPressed: () => state.onTapWatchList(context),
+            icon: const Icon(
+              Icons.favorite,
+              color: Colors.white,
+            ),
+          ),
           PopupMenuButton<int>(
             icon: const Icon(Icons.menu),
             onSelected: (item) => state.handleClick(item),
@@ -35,7 +42,16 @@ class MoviesView extends StatelessWidget {
               return ListView.builder(
                 itemCount: movies.length,
                 itemBuilder: (context, index) {
-                  return movieCard(context, movies[index]);
+                  return  movieCard(
+                      context: context,
+                      movie: movies[index],
+                      onPressedLikeButton: (Movie movie) {
+                        state.setMovies(movies[index]);
+                      },
+                      onTapMovie: (BuildContext context, Movie movie) {
+                        state.onTapMovie(context, movie);
+                      }
+                  );
                 },
               );
             }
@@ -58,59 +74,6 @@ class MoviesView extends StatelessWidget {
     );
   }
 
-  Widget movieCard(BuildContext context, Movie movie) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      margin: const EdgeInsets.all(8),
-      elevation: 5,
-      color: Colors.black12,
-      child: ListTile(
-        title: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Stack(
-                  children: <Widget> [
-                    posterImage(imageUrl: movie.posterurl),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () {
-                          state.setMovies(movie);
-                        },
-                        iconSize: 50,
-                        icon: Icon(
-                          movie.isLiked
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: Colors.blueGrey,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              text(text: movie.title),
-              const SizedBox(height: 8),
-              ratingBar(movie.avrRating),
-              const SizedBox(height: 8),
-              text(
-                text: 'Rating: ${movie.avrRating.toStringAsFixed(1)}',
-                size: 20,
-              ),
-            ],
-          ),
-        ),
-        onTap: () {
-          onTapMovie(context, movie);
-        },
-      ),
-    );
-  }
 
   void onTapMovie(BuildContext context, Movie movie) {
     Navigator.push(context,
