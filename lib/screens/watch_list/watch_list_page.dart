@@ -40,11 +40,13 @@ class WatchListController extends State<WatchListPage> {
     if (!movie.isLiked) {
       setState(() {
         movie.isLiked = true;
+        getWatchMovies();
       });
       firebaseService.setMovie(movie);
     } else if (movie.isLiked) {
       setState(() {
         movie.isLiked = false;
+        getWatchMovies();
       });
       firebaseService.deleteMovie(movie);
     }

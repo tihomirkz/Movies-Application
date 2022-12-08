@@ -36,9 +36,6 @@ class WatchListView extends StatelessWidget {
                     movie: movies[index],
                     onPressedLikeButton: (Movie movie) {
                       state.setMovies(movies[index]);
-                      state.setState(() {
-                        state.getWatchMovies();
-                      });
                     },
                     onTapMovie: (BuildContext context, Movie movie) {
                       state.onTapMovie(context, movie);
