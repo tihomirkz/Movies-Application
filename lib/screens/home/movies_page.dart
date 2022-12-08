@@ -24,29 +24,29 @@ class MoviesController extends State<MoviesPage> with MoviesService {
   @override
   void initState() {
     super.initState();
-    getMovies();
+    _getMovies();
   }
 
   void handleClick(int item) {
     switch (item) {
       case 0:
-        signOut();
+        _signOut();
         break;
       case 1:
-        userProfilePage();
+        _userProfilePage();
         break;
     }
   }
 
-  Future getMovies() async {
+  Future _getMovies() async {
     futureMovie = fetchMovies();
   }
 
-  Future signOut() async {
+  Future _signOut() async {
     firebaseService.signOut();
   }
 
-  void userProfilePage() {
+  void _userProfilePage() {
     Navigator.push(context,
       MaterialPageRoute(
         builder: (context) =>  const UserProfilePage(),

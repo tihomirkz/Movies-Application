@@ -107,7 +107,7 @@ Widget textField({
 }) {
   return TextFormField(
     controller: controller,
-    cursorColor: Colors.white,
+    cursorColor: Colors.blueGrey,
     textInputAction: TextInputAction.next,
     obscureText: obscureText,
     decoration: InputDecoration(labelText: labelText),
