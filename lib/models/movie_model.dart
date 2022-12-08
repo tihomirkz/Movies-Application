@@ -66,11 +66,11 @@ class Movie {
       'poster': poster,
       'posterurl': posterurl,
       'ratings': ratings,
-      'avrRating': posterurl,
+      'avrRating': avrRating,
       'releaseDate': releaseDate,
-      'storyline': title,
+      'storyline': storyline,
+      'title': title,
       'year': year,
-      'posterurl': posterurl,
       'isLiked': isLiked,
     };
   }
