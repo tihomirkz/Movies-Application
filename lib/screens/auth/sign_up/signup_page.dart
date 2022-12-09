@@ -46,6 +46,7 @@ class SignUpController extends State<SignUpPage> with MoviesService {
       if (result.status == ResultStatus.success) {
         Utils.showSnackBar('You are sign up with: ${displayNameController.text.trim()}',
             Colors.green.withOpacity(0.6));
+        navigationKey.currentState?.popUntil((route) => route.isFirst);
         final result2 = await fetchMovies();
         if (result2.status == ResultStatus.error) {
           Utils.showSnackBar(result2.error, Colors.red);
