@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       scaffoldMessengerKey: Utils.messengerKey,
       navigatorKey: navigationKey,
+      debugShowCheckedModeBanner: false,
       title: 'Movies Application',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
