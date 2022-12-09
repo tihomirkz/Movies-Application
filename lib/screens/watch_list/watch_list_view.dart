@@ -1,35 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:movies_application/models/movie_model.dart';
 import 'package:movies_application/screens/home/widgets/movie_widgets.dart';
-import 'movies_page.dart';
+import 'package:movies_application/screens/watch_list/watch_list_page.dart';
 
-class MoviesView extends StatelessWidget {
-  final MoviesController state;
 
-  const MoviesView(this.state, {Key? key}) : super(key: key);
+class WatchListView extends StatelessWidget {
+  final WatchListController state;
+
+  const WatchListView(this.state, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movies Application'),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => state.onTapWatchList(context),
-            icon: const Icon(
-              Icons.favorite,
-              color: Colors.white,
-            ),
-          ),
-          PopupMenuButton<int>(
-            icon: const Icon(Icons.menu),
-            onSelected: (item) => state.handleClick(item),
-            itemBuilder: (context) => [
-              const PopupMenuItem<int>(value: 0, child: Text('Logout')),
-              const PopupMenuItem<int>(value: 1, child: Text('User profile')),
-            ],
-          ),
-        ],
+        title: const Text('Watch list'),
       ),
       body: body(context),
     );
@@ -38,15 +22,16 @@ class MoviesView extends StatelessWidget {
   Widget body(BuildContext context) {
     return Container(
       color: Colors.blueGrey,
-      child: FutureBuilder<List<Movie>>(
-        future: state.futureMovie,
+      child:
+      FutureBuilder<List<Movie>>(
+        future: state.watchlistMovies,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Movie> movies = snapshot.data!;
             return ListView.builder(
               itemCount: movies.length,
               itemBuilder: (context, index) {
-                return  movieCard(
+                return movieCard(
                     context: context,
                     movie: movies[index],
                     onPressedLikeButton: (Movie movie) {
@@ -77,3 +62,4 @@ class MoviesView extends StatelessWidget {
     );
   }
 }
+
