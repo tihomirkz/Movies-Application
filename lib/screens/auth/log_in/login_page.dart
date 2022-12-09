@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_application/main.dart';
 import 'package:movies_application/screens/auth/firebase_service.dart';
+import 'package:movies_application/screens/auth/result.dart';
+import 'package:movies_application/screens/auth/utils/utils.dart';
 import 'login_view.dart';
 
 class LogInPage extends StatefulWidget {
@@ -38,8 +40,15 @@ class LoginController extends State<LogInPage> {
       ),
     );
 
-    await firebaseService.signInService(emailController, passwordController);
-
+    final result = await firebaseService.signInService(emailController.text.trim(), passwordController.text.trim());
+    if (result.status == ResultStatus.success) {
+      Utils.showSnackBar('You are sign up with: ${result.value?.user?.displayName}',
+          Colors.green.withOpacity(0.6));
+    } else {
+      Utils.showSnackBar(result.error, Colors.red);
+      navigationKey.currentState?.popUntil((route) => route.isFirst);
+      return;
+    }
     navigationKey.currentState?.popUntil((route) => route.isFirst);
   }
 }

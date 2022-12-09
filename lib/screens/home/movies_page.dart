@@ -13,28 +13,35 @@ class MoviesPage extends StatefulWidget {
   State<StatefulWidget> createState() => MoviesController();
 }
 
-class MoviesController extends State<MoviesPage> {
+class MoviesController extends State<MoviesPage> with MoviesService {
   @override
   Widget build(BuildContext context) => MoviesView(this);
   late Future<List<Movie>> futureMovie;
-  final service = MoviesService();
   final firebaseService = FirebaseService();
 
   @override
   void initState() {
     super.initState();
-    futureMovie = service.fetchMovies();
+    getMovies();
   }
 
   void handleClick(int item) {
     switch (item) {
       case 0:
-        firebaseService.signOut();
+        signOut();
         break;
       case 1:
         userProfilePage();
         break;
     }
+  }
+
+  Future getMovies() async {
+    futureMovie = fetchMovies();
+  }
+
+  Future signOut() async {
+    firebaseService.signOut();
   }
 
   void userProfilePage() {
