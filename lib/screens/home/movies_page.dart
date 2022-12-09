@@ -18,13 +18,6 @@ class MoviesPage extends StatefulWidget {
 class MoviesController extends State<MoviesPage> with MoviesService {
   @override
   Widget build(BuildContext context) => MoviesView(this);
-  late Future<List<Movie>> futureMovie;
-
-  @override
-  void initState() {
-    super.initState();
-    _getMovies();
-  }
 
   void handleClick(int item) {
     switch (item) {
@@ -35,10 +28,6 @@ class MoviesController extends State<MoviesPage> with MoviesService {
         _userProfilePage();
         break;
     }
-  }
-
-  Future _getMovies() async {
-    futureMovie = fetchMovies();
   }
 
   Future _signOut() async {

@@ -44,7 +44,7 @@ class FirebaseService {
 
   Future<void> setMoviesList(List<Movie> movies) async {
     for (var movie in movies) {
-      await db.collection(auth.currentUser!.email.toString())
+      await db.collection(currentUser().email.toString())
           .doc(movie.title)
           .set(movie.toJson())
           .onError((e, _) => print("Error writing document: $e"));
@@ -52,35 +52,24 @@ class FirebaseService {
   }
 
   Future<void> updateWatchList(Movie movie) async {
-    await db.collection(auth.currentUser!.email.toString())
+    await db.collection(currentUser().email.toString())
         .doc(movie.title)
         .update({"isLiked": movie.isLiked}).then(
             (value) => print("DocumentSnapshot successfully updated!"),
         onError: (e) => print("Error updating document $e"));
   }
 
-  Future<List<Movie>> getWatchMovies() async {
-    QuerySnapshot querySnapshot = await db.collection(auth.currentUser!.email.toString()).where("isLiked", isEqualTo: true).get();
-    final moviesList = querySnapshot.docs.map(
-          (doc) => Movie.fromJson(
-        doc.data() as Map<String, dynamic>,
-      ),
-    ).toList();
-    watchMoviesList = moviesList..sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
-    return watchMoviesList;
-  }
-
   Future<List<Movie>> getAllMovies() async {
-    QuerySnapshot querySnapshot = await db.collection(auth.currentUser!.email.toString()).get();
+    QuerySnapshot querySnapshot = await db.collection(currentUser().email.toString()).get();
     return dataFromMovies(querySnapshot);
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getStreamAllMovies() {
-    return db.collection(auth.currentUser!.email.toString()).snapshots();
+    return db.collection(currentUser().email.toString()).snapshots();
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getStreamWatchMovies() {
-    return db.collection(auth.currentUser!.email.toString()).where("isLiked", isEqualTo: true).snapshots();
+    return db.collection(currentUser().email.toString()).where("isLiked", isEqualTo: true).snapshots();
   }
 
   List<Movie> dataFromMovies(QuerySnapshot querySnapshot)  {
