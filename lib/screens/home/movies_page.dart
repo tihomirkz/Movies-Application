@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_application/models/movie_model.dart';
-import 'package:movies_application/screens/auth/firebase_service.dart';
 import 'package:movies_application/screens/details/details_page.dart';
 import 'package:movies_application/screens/user_profile/user_profile_page.dart';
 import 'package:movies_application/screens/watch_list/watch_list_page.dart';
@@ -19,7 +19,6 @@ class MoviesController extends State<MoviesPage> with MoviesService {
   @override
   Widget build(BuildContext context) => MoviesView(this);
   late Future<List<Movie>> futureMovie;
-  final firebaseService = FirebaseService();
 
   @override
   void initState() {
@@ -54,17 +53,25 @@ class MoviesController extends State<MoviesPage> with MoviesService {
     );
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamMovies() {
+    return firebaseService.getStreamAllMovies();
+  }
+
+  List<Movie> dataFromMovies(QuerySnapshot querySnapshot)  {
+    return firebaseService.dataFromMovies(querySnapshot);
+  }
+
   Future<void> setMovies(Movie movie) async {
     if (!movie.isLiked) {
       setState(() {
         movie.isLiked = true;
       });
-      firebaseService.setMovie(movie);
+      firebaseService.updateWatchList(movie);
     } else if (movie.isLiked) {
       setState(() {
         movie.isLiked = false;
       });
-      firebaseService.deleteMovie(movie);
+      firebaseService.updateWatchList(movie);
     }
   }
 

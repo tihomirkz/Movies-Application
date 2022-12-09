@@ -42,27 +42,54 @@ class FirebaseService {
     return auth.currentUser!;
   }
 
-  Future<void> setMovie(Movie movie) async {
-    await db.collection(auth.currentUser!.email.toString())
-        .doc(movie.title)
-        .set(movie.toJson())
-        .onError((e, _) => print("Error writing document: $e"));
-    await getMovies();
+  Future<void> setMoviesList(List<Movie> movies) async {
+    for (var movie in movies) {
+      await db.collection(auth.currentUser!.email.toString())
+          .doc(movie.title)
+          .set(movie.toJson())
+          .onError((e, _) => print("Error writing document: $e"));
+    }
   }
 
-  Future<void> deleteMovie(Movie movie) async {
+  Future<void> updateWatchList(Movie movie) async {
     await db.collection(auth.currentUser!.email.toString())
         .doc(movie.title)
-        .delete();
+        .update({"isLiked": movie.isLiked}).then(
+            (value) => print("DocumentSnapshot successfully updated!"),
+        onError: (e) => print("Error updating document $e"));
   }
 
-  Future<List<Movie>> getMovies() async {
-
-    QuerySnapshot querySnapshot = await db.collection(auth.currentUser!.email.toString()).get();
-    return watchMoviesList = querySnapshot.docs.map(
+  Future<List<Movie>> getWatchMovies() async {
+    QuerySnapshot querySnapshot = await db.collection(auth.currentUser!.email.toString()).where("isLiked", isEqualTo: true).get();
+    final moviesList = querySnapshot.docs.map(
           (doc) => Movie.fromJson(
         doc.data() as Map<String, dynamic>,
       ),
     ).toList();
+    watchMoviesList = moviesList..sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
+    return watchMoviesList;
   }
+
+  Future<List<Movie>> getAllMovies() async {
+    QuerySnapshot querySnapshot = await db.collection(auth.currentUser!.email.toString()).get();
+    return dataFromMovies(querySnapshot);
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamAllMovies() {
+    return db.collection(auth.currentUser!.email.toString()).snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamWatchMovies() {
+    return db.collection(auth.currentUser!.email.toString()).where("isLiked", isEqualTo: true).snapshots();
+  }
+
+  List<Movie> dataFromMovies(QuerySnapshot querySnapshot)  {
+    final moviesList = querySnapshot.docs.map(
+          (doc) => Movie.fromJson(
+        doc.data() as Map<String, dynamic>,
+      ),
+    ).toList();
+    return moviesList..sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
+  }
+
 }
